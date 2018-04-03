@@ -1,0 +1,34 @@
+.styledButton {
+	background-color:#ffffff;
+	border:1px solid #000000;
+	display:inline-block;
+	cursor:pointer;
+	color:#000000;
+	font-family:Arial;
+	font-size:15px;
+	padding:6px 28px;
+	text-decoration:none;
+}
+.styledButton:hover {
+	background-color: lightgray;
+}
+.styledButton:active {
+	position:relative;
+	top:1px;
+}
+
+input[type=file].styledButton {
+    box-sizing: border-box;
+}
+
+input[type=file].styledButton::-webkit-file-upload-button {
+    width: 0;
+    padding: 0;
+    margin: 0;
+    -webkit-appearance: none;
+    border: none;
+}
+
+.lightGreyBackground {
+    background-color: lightgrey;
+}

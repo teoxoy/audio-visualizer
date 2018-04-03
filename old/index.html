@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Audio Visualizer</title>
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/buttonStyle.css?1">
+    <link rel="stylesheet" type="text/css" href="css/rangeStyle.css?2">
+    <link rel="stylesheet" type="text/css" href="css/style.css?2">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="js/functions.js?11"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div id="content" class="wrap">
+        <div id="header">
+            <p>Audio Visualizer</p>
+        </div>
+        <audio id="audio"></audio>
+        <canvas id="canvas" height="1024" width="1600"></canvas>
+        <div id="timelineDiv">
+            <input id="timeline" class="styledRange" type="range" min="0" max="1" step="0.001" value="0"></input>
+            <p id="currentTimeLabel">0:00</p>
+            <p id="durationLabel">0:00</p>
+        </div>
+        <div id="eq">
+            <div id="labels">
+                <p>H</p>
+                <p>M</p>
+                <p>L</p>
+                <p>L</p>
+                <p>R</p>
+                <p>M</p>
+            </div>
+            <div id="eqSliders" class="sliders">
+                <input id="eqHigh" type="range" class="styledRange fullBackground" orient="vertical" min="0" max="1" step="0.001" value="1"></input>
+                <input id="eqMid" type="range" class="styledRange fullBackground" orient="vertical" min="0" max="1" step="0.001" value="1"></input>
+                <input id="eqLow" type="range" class="styledRange fullBackground" orient="vertical" min="0" max="1" step="0.001" value="1"></input>
+            </div>
+            <div id="controlButtons">
+                <button id="previousTrackButton" class="styledButton"><i class="material-icons">skip_previous</i></button>
+                <button id="playPauseButton" class="styledButton"><i class="material-icons">pause</i></button>
+                <button id="nextTrackButton" class="styledButton"><i class="material-icons">skip_next</i></button>
+            </div>
+            <div id="gainSliders" class="sliders">
+                <input id="eqLeft" type="range" class="styledRange fullBackground" orient="vertical" min="0" max="1" step="0.001" value="1"></input>
+                <input id="eqRight" type="range" class="styledRange fullBackground" orient="vertical" min="0" max="1" step="0.001" value="1"></input>
+                <input id="eqMain" type="range" class="styledRange fullBackground" orient="vertical" min="0" max="1" step="0.001" value="1"></input>
+            </div>
+        </div>
+        <form id="uploadForm" action="upload.php" method="post" enctype="multipart/form-data">
+            <p>Upload:</p>
+            <input type="file" class="styledButton" name="fileToUpload" id="fileToUpload" multiple >
+            <input type="submit" id="submitButton" class="styledButton" value="Upload" name="submit">
+        </form>
+        <ul id="sourceList"></ul>
+    </div>
+</body>
+</html>

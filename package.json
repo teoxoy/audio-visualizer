@@ -1,0 +1,32 @@
+{
+  "name": "audio-visualizer",
+  "version": "1.0.0",
+  "description": "A JS audio visualizer",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --config webpack.dev.js --host 0.0.0.0 --open --useLocalIp",
+    "build": "webpack --config webpack.prod.js"
+  },
+  "author": "Teoxoy",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.42",
+    "@babel/preset-env": "^7.0.0-beta.42",
+    "babel-loader": "^8.0.0-beta.2",
+    "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.5.1",
+    "css-loader": "^0.28.11",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "html-webpack-plugin": "^3.1.0",
+    "optimize-css-assets-webpack-plugin": "^4.0.0",
+    "webapp-webpack-plugin": "^2.0.0",
+    "webpack": "^4.4.1",
+    "webpack-cli": "^2.0.13",
+    "webpack-dev-server": "^3.1.1",
+    "webpack-merge": "^4.1.2"
+  },
+  "dependencies": {
+    "normalize.css": "^8.0.0",
+    "pixi.js": "^4.7.1"
+  }
+}

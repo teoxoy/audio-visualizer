@@ -1,0 +1,219 @@
+.wrap {
+    display: block;
+    width: 1600px;
+    margin: 0 auto;
+}
+
+html {
+    font-family: Arial;
+}
+
+* {
+    user-select: none;
+    outline: none;
+}
+
+#header{
+    padding: 10px;
+}
+
+#header p{
+    font-size: 50px;
+    text-align: center;
+    margin: 0px;
+}
+
+#content{
+    min-width: 1600px;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+/*Canvas*/
+#canvas{
+    width: 1600px;
+    height: 1024px;
+    display: block;
+}
+
+/*Timeline*/
+#timelineDiv{
+    position: relative;
+    height: 30px;
+    margin: 0;
+}
+
+#timeline{
+    top: 0px;
+    position: absolute;
+    display: block;
+    margin: 0;
+}
+
+#timeline::-webkit-slider-runnable-track{
+    height: 22px;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+#timeline::-webkit-slider-thumb{
+    margin-top: -1px;
+}
+
+#currentTimeLabel{
+    display: inline-block;
+    padding-left: 10px;
+    left: 0px;
+    top: 30px;  
+    margin: 0;
+    position: absolute;
+}
+
+#durationLabel{
+    right: 0px;
+    position: absolute;
+    display: inline-block;
+    padding-right: 10px;
+    top: 30px;    
+    margin: 0;    
+}
+
+/*EQ*/
+#eq{
+    height: 140px;
+    width: 600px;
+    display: block;
+    position: relative;
+    margin: 0 auto;
+}
+
+/*Control Buttons*/
+#controlButtons{
+    left: 172.5px;
+    position: absolute;
+    width: 255px;
+    display: inline-block;
+    top: 0px;    
+}
+
+/*Sliders*/
+.sliders{
+    position: absolute;
+    top: 20px;
+    width: 100px;
+    height: 120px;
+}
+
+.sliders input{
+    position: absolute;
+    top: 50px;
+    width: 100px;
+}
+
+/*Slider Labels*/
+#labels{
+    width: 600px;
+    height: 20px;
+}
+
+#labels p{
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: bold;
+    font-size: 18px;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+}
+
+#labels p:nth-child(1){
+    left: 8.5px;
+}
+
+#labels p:nth-child(2){
+    left: 39px;
+}
+
+#labels p:nth-child(3){
+    left: 69.5px;
+}
+
+#labels p:nth-child(4){
+    right: 69.5px;
+}
+
+#labels p:nth-child(5){
+    right: 39px;
+}
+
+#labels p:nth-child(6){
+    right: 8.5px;
+}
+
+/*First set of sliders*/
+#eqSliders{
+    left: 0px;
+}
+#eqHigh{
+    left: -30px;
+}
+#eqMid{
+    left: 0px;
+}
+#eqLow{
+    left: 30px;    
+}
+
+/*Second set of sliders*/
+#gainSliders{
+    right: 0px;
+}
+#eqLeft{
+    left: -30px;
+}
+#eqRight{
+    left: 0px;
+}
+#eqMain{
+    left: 30px;    
+}
+
+/*Form*/
+#uploadForm {
+    height: 35px;
+    width: 600px;
+    margin: 0 auto;
+    display: block;
+}
+
+#uploadForm p{
+    width: 91px;
+    display: inline-block;
+    margin: 0;
+}
+
+#uploadForm input[type=file]{
+    width: 400px;
+    display: inline-block;
+}
+
+#uploadForm input[type=submit]{
+    width: 100px;
+    display: inline-block;
+}
+
+/*Sources*/
+#sourceList {
+    margin-top: 20px;
+    display: block;
+    width: 600px;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+}
+
+#sourceList button{
+    width: 600px;
+    border-bottom: 0;
+}

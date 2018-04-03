@@ -1,0 +1,84 @@
+input[type=range].styledRange {
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 6.5px 0;
+}
+input[type=range][orient=vertical].styledRange {
+    transform:rotate(270deg);
+}
+input[type=range].styledRange::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 9px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
+  border-radius: 0px;
+  border: 1px solid #010101;
+}
+.fullBackground{
+  background: linear-gradient(to right,  black 100%, white 100%);
+}
+input[type=range].styledRange::-webkit-slider-thumb {
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
+  border: 1px solid #000000;
+  height: 22px;
+  width: 9px;
+  border-radius: 0px;
+  background: #ffffff;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -7.5px;
+}
+input[type=range].styledRange::-moz-range-track {
+  width: 100%;
+  height: 9px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
+  background: #ffffff;
+  border-radius: 0px;
+  border: 1px solid #010101;
+}
+input[type=range].styledRange::-moz-range-thumb {
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
+  border: 1px solid #000000;
+  height: 22px;
+  width: 9px;
+  border-radius: 0px;
+  background: #ffffff;
+  cursor: pointer;
+}
+input[type=range].styledRange::-ms-track {
+  width: 100%;
+  height: 9px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range].styledRange::-ms-fill-lower {
+  background: #e6e6e6;
+  border: 1px solid #010101;
+  border-radius: 0px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
+}
+input[type=range].styledRange::-ms-fill-upper {
+  background: #ffffff;
+  border: 1px solid #010101;
+  border-radius: 0px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
+}
+input[type=range].styledRange::-ms-thumb {
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
+  border: 1px solid #000000;
+  height: 22px;
+  width: 9px;
+  border-radius: 0px;
+  background: #ffffff;
+  cursor: pointer;
+  height: 9px;
+}
+input[type=range].styledRange:focus::-ms-fill-lower {
+  background: #ffffff;
+}
+input[type=range].styledRange:focus::-ms-fill-upper {
+  background: #ffffff;
+}
