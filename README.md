@@ -1,6 +1,10 @@
-# audio-visualizer
+<img src="./src/logo.svg" width="128" align="right">
 
-<img src="./src/logo.svg">
+<br/>
+<br/>
+<br/>
+
+# audio-visualizer
 
 A web audio visualizer
 
@@ -8,6 +12,8 @@ You can find the working website here: https://teoxoy.github.io/audio-visualizer
 
 I recommend using the Stereo Mix feature in Windows to route the sound to the visualizer.
 PS: Stereo Mix doesn't work with digital audio sources
+
+The old folder contains the original project I wrote 2 years ago
 
 ## Demo Songs (Free Copyright Music)
 
