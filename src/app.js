@@ -151,7 +151,7 @@ app.ticker.add(() => {
     const Y = app.renderer.height / 2
 
     graphics.lineStyle(1.5, 0x009245)
-    for (var i = 0; i < lowFrequencyData.length; i++) {
+    for (let i = 0; i < lowFrequencyData.length; i++) {
         if (lowFrequencyData[i] !== 0) {
             const R = lowFrequencyData[i] * smallerSide / 512
 
@@ -163,7 +163,7 @@ app.ticker.add(() => {
     }
 
     graphics.lineStyle(1.5, 0xAA9245)
-    for (var i = 0; i < highFrequencyData.length; i++) {
+    for (let i = 0; i < highFrequencyData.length; i++) {
         if (highFrequencyData[i] !== 0) {
             const R = highFrequencyData[i] * smallerSide / 1024
 
