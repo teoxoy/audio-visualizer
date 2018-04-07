@@ -109,12 +109,12 @@ function createDemoSong(id, name) {
     UI.addChild(text)
 }
 
-createDemoSong(0, 'And So It Begins by Artificial.Music')
-createDemoSong(1, 'Dreams by Joakim Karud')
-createDemoSong(2, 'Vibe With Me by Joakim Karud')
-createDemoSong(3, 'Rêveur by Peyruis')
-createDemoSong(4, 'Focused by Kontekst')
 createDemoSong(5, 'Crying Over You by Chris Morrow 4')
+createDemoSong(0, 'And So It Begins by Artificial.Music')
+createDemoSong(2, 'Vibe With Me by Joakim Karud')
+createDemoSong(1, 'Dreams by Joakim Karud')
+createDemoSong(4, 'Focused by Kontekst')
+createDemoSong(3, 'Rêveur by Peyruis')
 
 const lowAnalyzer = audioCtx.createAnalyser()
 lowAnalyzer.minDecibels = -80
