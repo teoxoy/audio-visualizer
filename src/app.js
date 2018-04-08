@@ -3,6 +3,7 @@ import * as PIXI from 'pixi.js'
 
 let smallerSide = Math.min(window.innerWidth, window.innerHeight)
 const rad15deg = Math.PI / 12
+let trippyMode = false
 
 const app = new PIXI.Application({
     antialias: true,
@@ -116,6 +117,28 @@ createDemoSong(1, 'Dreams by Joakim Karud')
 createDemoSong(4, 'Focused by Kontekst')
 createDemoSong(3, 'Rêveur by Peyruis')
 
+const trippyText = new PIXI.Text('Toggle trippy mode')
+trippyText.position.set(5, 200)
+trippyText.style.fill = 0xFFFFFF
+trippyText.style.fillGradientType = PIXI.TEXT_GRADIENT.LINEAR_HORIZONTAL
+trippyText.interactive = true
+trippyText.buttonMode = true
+trippyText.on('pointerdown', () => {
+    trippyMode = !trippyMode
+    if (trippyMode) {
+        trippyText.style.fill = [0xFF0000, 0xE2571E, 0xFF7F00, 0xFFFF00, 0x00FF00, 0x96BF33, 0x0000FF, 0x4B0082, 0x8B00FF, 0xFFFFFF]
+
+        lowAnalyzer.smoothingTimeConstant = 0.8
+        highAnalyzer.smoothingTimeConstant = 0.88
+    } else {
+        trippyText.style.fill = 0xFFFFFF
+
+        lowAnalyzer.smoothingTimeConstant = 0.89
+        highAnalyzer.smoothingTimeConstant = 0.87
+    }
+})
+UI.addChild(trippyText)
+
 const lowAnalyzer = audioCtx.createAnalyser()
 lowAnalyzer.minDecibels = -80
 lowAnalyzer.maxDecibels = -20
@@ -154,7 +177,7 @@ app.ticker.add(() => {
     for (let i = 0; i < lowFrequencyData.length; i++) {
         if (lowFrequencyData[i] !== 0) {
             const R = lowFrequencyData[i] * smallerSide / 512
-
+            if (trippyMode) graphics.lineStyle(1.5, 0xFFFFFF * Math.random())
             drawArcV1(i, X, Y, R, 1, 5)
             drawArcV1(i, X, Y, R, 7, 11)
             drawArcV1(i, X, Y, R, 13, 17)
@@ -166,7 +189,7 @@ app.ticker.add(() => {
     for (let i = 0; i < highFrequencyData.length; i++) {
         if (highFrequencyData[i] !== 0) {
             const R = highFrequencyData[i] * smallerSide / 1024
-
+            if (trippyMode) graphics.lineStyle(1.5, 0xFFFFFF * Math.random())
             drawArcV2(i, X, Y, R, 1, 5)
             drawArcV2(i, X, Y, R, 7, 11)
             drawArcV2(i, X, Y, R, 13, 17)
