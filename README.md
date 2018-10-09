@@ -6,6 +6,8 @@
 
 # audio-visualizer
 
+![Preview](./src/preview.png)
+
 A web audio visualizer
 
 You can find the working website here: https://teoxoy.github.io/audio-visualizer
