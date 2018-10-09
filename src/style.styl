@@ -1,0 +1,104 @@
+
+html
+    color: white
+    font-family: 'Roboto', sans-serif
+    cursor: default
+
+
+p, h1, h2
+    margin: 0
+
+
+#hide
+    position: fixed
+    bottom: 8px
+    right: 8px
+
+
+#canvas
+    display: block
+    position: fixed
+
+
+#menu
+    position: fixed
+    top: 8px
+    left: 8px
+
+
+#trippy
+    margin-top: 16px
+    display: inline-block
+    cursor: pointer
+
+    &.active
+        color: transparent
+        background-clip: text
+        background-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet)
+
+
+#record
+    display: inline-block
+    cursor: pointer
+
+    &:hover
+        color: rgba(244, 67, 54, 0.5)
+
+    &.active
+        color: #F44336
+
+
+#songs
+    list-style: none
+
+    li
+        float: left
+        clear: both
+        cursor: pointer
+
+        &:hover
+            color: rgba(0, 150, 136, 0.5)
+
+        &.active
+            color: #009688
+
+
+#copyright
+    font-size: 12px
+    position: fixed
+    bottom: 8px
+    left: 8px
+
+
+/* Github Corner */
+.github-corner
+    cursor: default
+    .octo-arm
+    .octo-body
+        pointer-events: none
+
+    .triangle:hover
+        cursor: pointer
+        &+ .octo-arm
+            animation:octocat-wave 560ms ease-in-out
+
+    @media (max-width:500px)
+        .triangle:hover + .octo-arm
+            animation:none
+        .octo-arm
+            animation:octocat-wave 560ms ease-in-out
+
+@keyframes octocat-wave
+    0%,100%
+        transform:rotate(0)
+
+    20%,60%
+        transform:rotate(-25deg)
+
+    40%,80%
+        transform:rotate(10deg)
+
+
+
+
+

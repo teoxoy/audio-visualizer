@@ -25,3 +25,8 @@ The old folder contains the original project I wrote 2 years ago
 | 3  | Rêveur           | Peyruis          | https://soundcloud.com/peyruis/peyruis-reveur-1/                 |
 | 4  | Focused          | Kontekst         | https://soundcloud.com/kontekstmusic/focused                     |
 | 5  | Crying Over You  | Chris Morrow 4   | https://soundcloud.com/chris-morrow-3/hip-hop-rap-instrumental-2 |
+
+# Copyright notice
+
+All audio assets used in this project belong to their respective artists and
+are subject to the Creative Commons License.

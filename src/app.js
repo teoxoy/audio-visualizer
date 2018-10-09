@@ -1,63 +1,51 @@
 import 'normalize.css'
+import './style.styl'
 import * as PIXI from 'pixi.js'
+import demoSongs from './demo-songs/*.mp3'
 
-let smallerSide = Math.min(window.innerWidth, window.innerHeight)
-const rad15deg = Math.PI / 12
+const MARGIN = 8
 let trippyMode = false
+const rad15deg = Math.PI / 12
+let smallerSide = Math.min(window.innerWidth, window.innerHeight)
+
+PIXI.Graphics.CURVES.adaptive = true
+PIXI.Graphics.CURVES.maxLength = 5
 
 const app = new PIXI.Application({
+    view: document.getElementById('canvas'),
     antialias: true,
     resolution: window.devicePixelRatio
 })
-app.renderer.view.style.position = 'absolute'
-app.renderer.view.style.display = 'block'
 app.renderer.autoResize = true
 app.renderer.resize(window.innerWidth, window.innerHeight)
 window.addEventListener('resize', () => {
     app.renderer.resize(window.innerWidth, window.innerHeight)
     smallerSide = Math.min(window.innerWidth, window.innerHeight)
-    copyrightText.position.y = app.renderer.height
 }, false)
-document.body.appendChild(app.view)
+
+app.ticker.speed = 2
 
 const graphics = new PIXI.Graphics()
 app.stage.addChild(graphics)
 
-const UI = new PIXI.Container()
-app.stage.addChild(UI)
-
-const copyrightText = new PIXI.Text(' Copyright © 2018 Tanasoaia Teodor Andrei\n All audio assets used in this project belong to their respective artists and are subject to the Creative Commons License')
-copyrightText.anchor.set(0, 1)
-copyrightText.position.y = app.renderer.height
-copyrightText.style.fill = 0xFFFFFF
-copyrightText.style.fontSize = 12
-UI.addChild(copyrightText)
-
-const hideText = new PIXI.Text('Press H to hide the UI')
-hideText.anchor.set(1, 0)
-hideText.position.set(app.renderer.width - 5, 5)
-hideText.style.fill = 0xFFFFFF
-hideText.style.fontSize = 14
-UI.addChild(hideText)
-document.addEventListener('keydown', e => {
-    if (e.keyCode === 72) UI.visible = !UI.visible
-})
+const UI = document.getElementById('ui')
+function toggleUI() {
+    if (!UI.style.visibility || UI.style.visibility === 'visible') UI.style.visibility = 'hidden'
+    else UI.style.visibility = 'visible'
+}
+document.addEventListener('keydown', e => { if (e.keyCode === 72) toggleUI() })
 
 let audioSrc
 const audioCtx = new AudioContext()
 
-const recordText = new PIXI.Text('Record')
-recordText.position.set(5, 5)
-recordText.style.fill = 0xFFFFFF
-recordText.interactive = true
-recordText.buttonMode = true
-recordText.on('pointerdown', () => {
+document.getElementById('record').onclick = e => {
     if (audioSrc === undefined || audioSrc instanceof MediaElementAudioSourceNode) {
         if (navigator.mediaDevices) {
             navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
-                if (activeSong) activeSong.style.fill = 0xFFFFFF
-                activeSong = recordText
-                recordText.style.fill = 0xAA9245
+                if (activeSong) activeSong.classList.remove('active')
+                activeSong = e.target
+                e.target.classList.add('active')
+
                 audioEl.pause()
                 if (audioSrc !== undefined) audioSrc.disconnect()
                 audioSrc = audioCtx.createMediaStreamSource(stream)
@@ -70,13 +58,7 @@ recordText.on('pointerdown', () => {
             console.log('getUserMedia not supported on your browser!')
         }
     }
-})
-UI.addChild(recordText)
-
-const text = new PIXI.Text('Demo Songs:')
-text.position.set(5, 40)
-text.style.fill = 0xFFFFFF
-UI.addChild(text)
+}
 
 const audioEl = document.createElement('audio')
 const MEASN = audioCtx.createMediaElementSource(audioEl)
@@ -84,20 +66,12 @@ document.body.appendChild(audioEl)
 
 let activeSong
 
-let y = 0
-function createDemoSong(id, name) {
-    const text = new PIXI.Text(name)
-    text.position.set(10, y++ * 20 + 80)
-    text.style.fontSize = 16
-    text.style.fill = 0xFFFFFF
-    text.interactive = true
-    text.buttonMode = true
-    text.on('pointerdown', () => {
-        if (activeSong) activeSong.style.fill = 0xFFFFFF
-        activeSong = text
-        text.style.fill = 0x009245
-        audioEl.src = `./demo-songs/${id}.mp3`
-        //https://bugs.chromium.org/p/chromium/issues/detail?id=715049
+document.getElementById('songs').childNodes.forEach(c => {
+    c.addEventListener('pointerdown', () => {
+        if (activeSong) activeSong.classList.remove('active')
+        activeSong = c
+        c.classList.add('active')
+        audioEl.src = demoSongs[c.dataset.id]
         audioEl.play()
         if (audioSrc === undefined || audioSrc instanceof MediaStreamAudioSourceNode) {
             if (audioSrc !== undefined) audioSrc.disconnect()
@@ -107,37 +81,22 @@ function createDemoSong(id, name) {
             audioSrc.connect(audioCtx.destination)
         }
     })
-    UI.addChild(text)
-}
+})
 
-createDemoSong(5, 'Crying Over You by Chris Morrow 4')
-createDemoSong(0, 'And So It Begins by Artificial.Music')
-createDemoSong(2, 'Vibe With Me by Joakim Karud')
-createDemoSong(1, 'Dreams by Joakim Karud')
-createDemoSong(4, 'Focused by Kontekst')
-createDemoSong(3, 'Rêveur by Peyruis')
-
-const trippyText = new PIXI.Text('Toggle trippy mode')
-trippyText.position.set(5, 200)
-trippyText.style.fill = 0xFFFFFF
-trippyText.style.fillGradientType = PIXI.TEXT_GRADIENT.LINEAR_HORIZONTAL
-trippyText.interactive = true
-trippyText.buttonMode = true
-trippyText.on('pointerdown', () => {
+document.getElementById('trippy').onclick = e => {
     trippyMode = !trippyMode
     if (trippyMode) {
-        trippyText.style.fill = [0xFF0000, 0xE2571E, 0xFF7F00, 0xFFFF00, 0x00FF00, 0x96BF33, 0x0000FF, 0x4B0082, 0x8B00FF, 0xFFFFFF]
+        e.target.classList.add('active')
 
         lowAnalyzer.smoothingTimeConstant = 0.8
         highAnalyzer.smoothingTimeConstant = 0.88
     } else {
-        trippyText.style.fill = 0xFFFFFF
+        e.target.classList.remove('active')
 
         lowAnalyzer.smoothingTimeConstant = 0.89
         highAnalyzer.smoothingTimeConstant = 0.87
     }
-})
-UI.addChild(trippyText)
+}
 
 const lowAnalyzer = audioCtx.createAnalyser()
 lowAnalyzer.minDecibels = -80
@@ -170,50 +129,49 @@ app.ticker.add(() => {
     lowAnalyzer.getByteFrequencyData(lowFrequencyData)
     highAnalyzer.getByteFrequencyData(highFrequencyData)
 
-    const X = app.renderer.width / 2
-    const Y = app.renderer.height / 2
-
-    graphics.lineStyle(1.5, 0x009245)
+    graphics.lineStyle(1.5, 0x009688)
     for (let i = 0; i < lowFrequencyData.length; i++) {
         if (lowFrequencyData[i] !== 0) {
             const R = lowFrequencyData[i] * smallerSide / 512
             if (trippyMode) graphics.lineStyle(1.5, 0xFFFFFF * Math.random())
-            drawArcV1(i, X, Y, R, 1, 5)
-            drawArcV1(i, X, Y, R, 7, 11)
-            drawArcV1(i, X, Y, R, 13, 17)
-            drawArcV1(i, X, Y, R, 19, 23)
+            drawArcV1(R, 1, 5)
+            drawArcV1(R, 7, 11)
+            drawArcV1(R, 13, 17)
+            drawArcV1(R, 19, 23)
         }
     }
 
-    graphics.lineStyle(1.5, 0xAA9245)
+    graphics.lineStyle(1.5, 0xFF9800)
     for (let i = 0; i < highFrequencyData.length; i++) {
         if (highFrequencyData[i] !== 0) {
             const R = highFrequencyData[i] * smallerSide / 1024
             if (trippyMode) graphics.lineStyle(1.5, 0xFFFFFF * Math.random())
-            drawArcV2(i, X, Y, R, 1, 5)
-            drawArcV2(i, X, Y, R, 7, 11)
-            drawArcV2(i, X, Y, R, 13, 17)
-            drawArcV2(i, X, Y, R, 19, 23)
+            drawArcV2(i, R, 1, 5)
+            drawArcV2(i, R, 7, 11)
+            drawArcV2(i, R, 13, 17)
+            drawArcV2(i, R, 19, 23)
         }
     }
 })
 
-function drawArcV1(i, w, h, r, a, b) {
-    const v = (0.75 - r / (smallerSide / 2))
+function drawArcV1(r, a, b) {
+    const v = (0.75 - r / (smallerSide / 2 - MARGIN))
     const A = rad15deg * a + v
     const B = rad15deg * b - v
     if (B > A) {
-        drawArc(w, h, r, A, B)
+        drawArc(r, A, B)
     }
 }
 
-function drawArcV2(i, w, h, r, a, b) {
-    drawArc(w, h, r, rad15deg * (a + i), rad15deg * (b + i))
+function drawArcV2(i, r, a, b) {
+    drawArc(r, rad15deg * (a + i), rad15deg * (b + i), true)
 }
 
-function drawArc(cx, cy, radius, startAngle, endAngle) {
-    const startX = cx + (Math.cos(startAngle) * radius)
-    const startY = cy + (Math.sin(startAngle) * radius)
+function drawArc(radius, startAngle, endAngle, spikes = false) {
+    const X = window.innerWidth / 2
+    const Y = window.innerHeight / 2
+    const startX = X + (Math.cos(startAngle) * (radius - MARGIN))
+    const startY = Y + (Math.sin(startAngle) * (radius - MARGIN))
     graphics.moveTo(startX, startY)
-    graphics.arc(cx, cy, radius, startAngle, endAngle)
+    graphics.arc(X, Y, radius - MARGIN - (spikes ? 4 : 0), startAngle, endAngle)
 }
