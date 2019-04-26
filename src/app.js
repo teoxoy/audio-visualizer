@@ -8,8 +8,8 @@ let trippyMode = false
 const rad15deg = Math.PI / 12
 let smallerSide = Math.min(window.innerWidth, window.innerHeight)
 
-PIXI.Graphics.CURVES.adaptive = true
-PIXI.Graphics.CURVES.maxLength = 5
+PIXI.GRAPHICS_CURVES.adaptive = true
+PIXI.GRAPHICS_CURVES.maxLength = 5
 
 const app = new PIXI.Application({
     view: document.getElementById('canvas'),
@@ -18,10 +18,14 @@ const app = new PIXI.Application({
 })
 app.renderer.autoResize = true
 app.renderer.resize(window.innerWidth, window.innerHeight)
-window.addEventListener('resize', () => {
-    app.renderer.resize(window.innerWidth, window.innerHeight)
-    smallerSide = Math.min(window.innerWidth, window.innerHeight)
-}, false)
+window.addEventListener(
+    'resize',
+    () => {
+        app.renderer.resize(window.innerWidth, window.innerHeight)
+        smallerSide = Math.min(window.innerWidth, window.innerHeight)
+    },
+    false
+)
 
 app.ticker.speed = 2
 
@@ -33,7 +37,9 @@ function toggleUI() {
     if (!UI.style.visibility || UI.style.visibility === 'visible') UI.style.visibility = 'hidden'
     else UI.style.visibility = 'visible'
 }
-document.addEventListener('keydown', e => { if (e.keyCode === 72) toggleUI() })
+document.addEventListener('keydown', e => {
+    if (e.keyCode === 72) toggleUI()
+})
 
 let audioSrc
 const audioCtx = new AudioContext()
@@ -41,19 +47,22 @@ const audioCtx = new AudioContext()
 document.getElementById('record').onclick = e => {
     if (audioSrc === undefined || audioSrc instanceof MediaElementAudioSourceNode) {
         if (navigator.mediaDevices) {
-            navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
-                if (activeSong) activeSong.classList.remove('active')
-                activeSong = e.target
-                e.target.classList.add('active')
+            navigator.mediaDevices
+                .getUserMedia({ audio: true })
+                .then(stream => {
+                    if (activeSong) activeSong.classList.remove('active')
+                    activeSong = e.target
+                    e.target.classList.add('active')
 
-                audioEl.pause()
-                if (audioSrc !== undefined) audioSrc.disconnect()
-                audioSrc = audioCtx.createMediaStreamSource(stream)
-                audioSrc.connect(lowFilter)
-                audioSrc.connect(highFilter)
-            }).catch(err => {
-                console.log('The following gUM error occured: ' + err)
-            })
+                    audioEl.pause()
+                    if (audioSrc !== undefined) audioSrc.disconnect()
+                    audioSrc = audioCtx.createMediaStreamSource(stream)
+                    audioSrc.connect(lowFilter)
+                    audioSrc.connect(highFilter)
+                })
+                .catch(err => {
+                    console.log('The following gUM error occured: ' + err)
+                })
         } else {
             console.log('getUserMedia not supported on your browser!')
         }
@@ -132,8 +141,8 @@ app.ticker.add(() => {
     graphics.lineStyle(1.5, 0x009688)
     for (let i = 0; i < lowFrequencyData.length; i++) {
         if (lowFrequencyData[i] !== 0) {
-            const R = lowFrequencyData[i] * smallerSide / 512
-            if (trippyMode) graphics.lineStyle(1.5, 0xFFFFFF * Math.random())
+            const R = (lowFrequencyData[i] * smallerSide) / 512
+            if (trippyMode) graphics.lineStyle(1.5, 0xffffff * Math.random())
             drawArcV1(R, 1, 5)
             drawArcV1(R, 7, 11)
             drawArcV1(R, 13, 17)
@@ -141,11 +150,11 @@ app.ticker.add(() => {
         }
     }
 
-    graphics.lineStyle(1.5, 0xFF9800)
+    graphics.lineStyle(1.5, 0xff9800)
     for (let i = 0; i < highFrequencyData.length; i++) {
         if (highFrequencyData[i] !== 0) {
-            const R = highFrequencyData[i] * smallerSide / 1024
-            if (trippyMode) graphics.lineStyle(1.5, 0xFFFFFF * Math.random())
+            const R = (highFrequencyData[i] * smallerSide) / 1024
+            if (trippyMode) graphics.lineStyle(1.5, 0xffffff * Math.random())
             drawArcV2(i, R, 1, 5)
             drawArcV2(i, R, 7, 11)
             drawArcV2(i, R, 13, 17)
@@ -155,7 +164,7 @@ app.ticker.add(() => {
 })
 
 function drawArcV1(r, a, b) {
-    const v = (0.75 - r / (smallerSide / 2 - MARGIN))
+    const v = 0.75 - r / (smallerSide / 2 - MARGIN)
     const A = rad15deg * a + v
     const B = rad15deg * b - v
     if (B > A) {
@@ -170,8 +179,8 @@ function drawArcV2(i, r, a, b) {
 function drawArc(radius, startAngle, endAngle, spikes = false) {
     const X = window.innerWidth / 2
     const Y = window.innerHeight / 2
-    const startX = X + (Math.cos(startAngle) * (radius - MARGIN))
-    const startY = Y + (Math.sin(startAngle) * (radius - MARGIN))
+    const startX = X + Math.cos(startAngle) * (radius - MARGIN)
+    const startY = Y + Math.sin(startAngle) * (radius - MARGIN)
     graphics.moveTo(startX, startY)
     graphics.arc(X, Y, radius - MARGIN - (spikes ? 4 : 0), startAngle, endAngle)
 }

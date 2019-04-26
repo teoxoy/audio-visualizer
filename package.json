@@ -1,31 +1,31 @@
 {
-  "name": "audio-visualizer",
-  "version": "1.0.0",
-  "description": "A JS audio visualizer",
-  "main": "index.js",
-  "scripts": {
-    "start": "parcel src/index.html --no-hmr",
-    "prebuild": "rimraf dist/*",
-    "build": "parcel build src/index.html --public-url ./",
-    "setupDist": "git worktree add dist gh-pages",
-    "deploy": "cd dist && git add --all && git reset -- stats && git commit -m \"new version\" && git push origin gh-pages"
-  },
-  "author": "Teoxoy",
-  "license": "MIT",
-  "browserslist": [
-    "last 2 Chrome versions",
-    "last 2 Firefox versions",
-    "last 2 Safari versions",
-    "last 2 Edge versions"
-  ],
-  "dependencies": {
-    "normalize.css": "^8.0.0",
-    "pixi.js": "^4.8.2"
-  },
-  "devDependencies": {
-    "autoprefixer": "^9.1.5",
-    "parcel-bundler": "^1.10.2",
-    "rimraf": "^2.6.2",
-    "stylus": "^0.54.5"
-  }
+    "name": "audio-visualizer",
+    "version": "1.0.0",
+    "description": "A JS audio visualizer",
+    "main": "index.js",
+    "scripts": {
+        "start": "parcel src/index.html --port 8080",
+        "prebuild": "rimraf dist/*",
+        "build": "parcel build src/index.html --public-url ./",
+        "setupDist": "git worktree add dist gh-pages",
+        "deploy": "cd dist && git add --all && git reset -- stats && git commit -m \"new version\" && git push origin gh-pages"
+    },
+    "author": "Teoxoy",
+    "license": "MIT",
+    "browserslist": [
+        "last 2 Chrome versions",
+        "last 2 Firefox versions",
+        "last 2 Safari versions",
+        "last 2 Edge versions"
+    ],
+    "dependencies": {
+        "normalize.css": "^8.0.1",
+        "pixi.js": "^5.0.0-rc.3"
+    },
+    "devDependencies": {
+        "autoprefixer": "^9.5.1",
+        "parcel-bundler": "^1.12.3",
+        "rimraf": "^2.6.3",
+        "stylus": "^0.54.5"
+    }
 }
