@@ -1,12 +1,10 @@
-import 'normalize.css'
-import './style.styl'
 import * as PIXI from 'pixi.js'
 import demoSongs from './demo-songs/*.mp3'
 
 const MARGIN = 8
 let trippyMode = false
 const rad15deg = Math.PI / 12
-let smallerSide = Math.min(window.innerWidth, window.innerHeight)
+let smallerSide
 
 PIXI.GRAPHICS_CURVES.adaptive = true
 PIXI.GRAPHICS_CURVES.maxLength = 5
@@ -14,20 +12,19 @@ PIXI.GRAPHICS_CURVES.maxLength = 5
 const app = new PIXI.Application({
     view: document.getElementById('canvas'),
     antialias: true,
-    resolution: window.devicePixelRatio
+    resolution: window.devicePixelRatio,
+    backgroundColor: 0x0f0f0f,
+    autoDensity: true
 })
-app.renderer.autoResize = true
-app.renderer.resize(window.innerWidth, window.innerHeight)
-window.addEventListener(
-    'resize',
-    () => {
-        app.renderer.resize(window.innerWidth, window.innerHeight)
-        smallerSide = Math.min(window.innerWidth, window.innerHeight)
-    },
-    false
-)
 
 app.ticker.speed = 2
+
+window.addEventListener('resize', resize, false)
+resize()
+function resize() {
+    app.renderer.resize(window.innerWidth, window.innerHeight)
+    smallerSide = Math.min(window.innerWidth, window.innerHeight)
+}
 
 const graphics = new PIXI.Graphics()
 app.stage.addChild(graphics)
@@ -52,11 +49,12 @@ document.getElementById('record').onclick = e => {
     }
 }
 
-document.getElementById('songs').childNodes.forEach(c => {
-    c.addEventListener('pointerdown', () => {
-        changeInput(c, audioEl)
+const songs = document.getElementsByClassName('song')
+for (const song of songs) {
+    song.addEventListener('pointerdown', () => {
+        changeInput(song, audioEl)
     })
-})
+}
 
 document.getElementById('trippy').onclick = e => {
     initAudioContext()

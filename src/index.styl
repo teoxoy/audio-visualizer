@@ -1,0 +1,112 @@
+/* Minimal CSS Reset */
+
+*
+    box-sizing: border-box
+
+html
+    font-size: 12px
+
+body, h1, h2, h3, h4, h5, h6, p, ol, ul
+    margin: 0
+    padding: 0
+    font-weight: normal
+
+ol, ul
+    list-style: none
+
+img
+    max-width: 100%
+    height: auto
+
+a
+	text-decoration: none
+
+
+html
+    color: white
+    font-family: 'Roboto', sans-serif
+    cursor: default
+
+
+#menu
+    font-size: 1.2em
+    position: fixed
+    top: 8px
+    left: 8px
+    h1
+        margin-bottom: 4px
+    #record
+        cursor: pointer
+        &:hover
+            color: rgba(244, 67, 54, 0.5)
+        &.active
+            color: #F44336
+    .song
+        margin-left: 16px
+        cursor: pointer
+        &:hover
+            color: rgba(0, 150, 136, 0.5)
+        &.active
+            color: #009688
+    #trippy
+        margin-top: 16px
+        cursor: pointer
+        &.active
+            color: transparent
+            background-clip: text
+            background-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet)
+
+
+#hide
+    position: fixed
+    bottom: 8px
+    right: 8px
+
+
+#canvas
+    display: block
+    position: fixed
+
+
+#copyright
+    position: fixed
+    bottom: 8px
+    left: 8px
+
+
+/* Github Corner */
+.github-corner
+    position: absolute
+    top: 0
+    right: 0
+    cursor: default
+
+    .octo-arm
+    .octo-body
+        pointer-events: none
+
+    .triangle:hover
+        cursor: pointer
+        &+ .octo-arm
+            animation:octocat-wave 560ms ease-in-out
+
+    @media (max-width:500px)
+        .triangle:hover + .octo-arm
+            animation:none
+        .octo-arm
+            animation:octocat-wave 560ms ease-in-out
+
+@keyframes octocat-wave
+    0%,100%
+        transform:rotate(0)
+
+    20%,60%
+        transform:rotate(-25deg)
+
+    40%,80%
+        transform:rotate(10deg)
+
+
+
+
+
