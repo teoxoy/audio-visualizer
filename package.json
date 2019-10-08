@@ -19,12 +19,12 @@
         "last 2 Edge versions"
     ],
     "dependencies": {
-        "pixi.js": "^5.0.0-rc.3"
+        "pixi.js": "^5.1.5"
     },
     "devDependencies": {
-        "autoprefixer": "^9.5.1",
-        "parcel-bundler": "^1.12.3",
-        "rimraf": "^2.6.3",
-        "stylus": "^0.54.5"
+        "autoprefixer": "^9.6.4",
+        "parcel-bundler": "^1.12.4",
+        "rimraf": "^3.0.0",
+        "stylus": "^0.54.7"
     }
 }
